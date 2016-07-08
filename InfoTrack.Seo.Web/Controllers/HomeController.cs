@@ -24,25 +24,28 @@ namespace InfoTrack.Seo.Web.Controllers
 
         public ActionResult Index()
         {
-            ISearchModel model = new SearchModel();
-            return View("Index", model);
+            ISearchViewModel searchViewModel = new SearchViewModel();
+            return View("Index", searchViewModel);
         }
 
 
         [HttpPost]
-        public ActionResult Index(SearchModel searchModel)
+        public ActionResult Index(SearchViewModel searchViewModel)
         {
-
             List<int> positions;
-
+            
             if (ModelState.IsValid)
             {
-                positions = _googleSearchPositionHelper.GetPosition(searchModel.Url, searchModel.Keywords);
-                searchModel.Positions = positions;
-                return View("Index", searchModel);
+                positions = _googleSearchPositionHelper.GetPosition(searchViewModel.Url, searchViewModel.Keywords);
+                
+                if (positions != null)
+                {
+                    ViewData["Positions"] = positions;
+                }
             }
 
-            return View("Index", searchModel);
+            return View("Index", searchViewModel);
         }
+
     }
 }

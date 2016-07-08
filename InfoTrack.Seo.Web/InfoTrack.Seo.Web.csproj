@@ -163,9 +163,9 @@
     </Compile>
     <Compile Include="Helpers\GoogleSearchPositionHelper.cs" />
     <Compile Include="Inerfaces\IGoogleSearchPositionHelper.cs" />
-    <Compile Include="Inerfaces\ISearchModel.cs" />
+    <Compile Include="Inerfaces\ISearchViewModel.cs" />
     <Compile Include="Ioc\AppRegistration.cs" />
-    <Compile Include="Models\SearchModel.cs" />
+    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

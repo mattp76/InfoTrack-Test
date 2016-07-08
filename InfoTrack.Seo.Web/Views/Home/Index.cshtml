@@ -1,4 +1,9 @@
-﻿@model InfoTrack.Seo.Web.Interfaces.ISearchModel
+﻿@model InfoTrack.Seo.Web.Interfaces.ISearchViewModel
+
+@{
+
+    List<int> positions = ViewData["Positions"] as List<int>;
+}
 
 @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "SearchForm" }))
 {
@@ -9,18 +14,18 @@
     <button type="submit" class="btn btn-default">Submit</button>
 }
 
-@if (!string.IsNullOrEmpty(Model.Url) && !string.IsNullOrEmpty(Model.Keywords))
-{
-    <div class="searchResults">
-        <p>
-            @if (Model.Positions.Count > 0)
-            {
-                <span class="positions">Google position(s): @string.Join(",", Model.Positions)</span>
-            
-            }else {
-                <span class="positions">No results</span>
-             }
-        </p>
-    </div>
+
+@if(!string.IsNullOrEmpty(Model.Keywords) && !string.IsNullOrEmpty(Model.Url)) {
+<div class="searchResults">
+    <p>
+        @if (positions != null)
+        {
+            <span class="positions">Google position(s): @string.Join(",", positions)</span>
+        }else {
+            <span class="positions">No results</span>
+        }
+    </p>
+</div>
 }
+
 

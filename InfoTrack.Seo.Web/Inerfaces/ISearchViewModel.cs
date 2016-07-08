@@ -6,12 +6,9 @@ using System.Web;
 
 namespace InfoTrack.Seo.Web.Interfaces
 {
-    public interface ISearchModel
+    public interface ISearchViewModel
     {
         string Keywords { get; set; }
-
         string Url { get; set; }
-
-        List<int> Positions { get; set; }
     }
 }

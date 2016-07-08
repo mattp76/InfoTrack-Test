@@ -17,40 +17,60 @@ namespace InfoTrack.Seo.Web.Tests
     {
 
         private HomeController controller;
-        private SearchModel searchModel;
+        private string url;
+        private string keywords;
+        private List<int> positions;
 
         [TestInitialize]
         public void Initialize() {
 
-            List<int> positions = new List<int>(new int[] { 1, 2, 3 });
-            string url = "https://www.infotrack.com.au";
-            string keywords = "online term search";
+            positions = new List<int>{ 1, 2, 3 };
+            url = "www.infotrack.com.au";
+            keywords = "online term search";
     
             var mockGoogleSearchHelper = new Mock<IGoogleSearchPositionHelper>();
-            var mockSearchModel = new Mock<ISearchModel>();
-    
-            mockGoogleSearchHelper.Setup(data => data.GetPosition(url, keywords)).Returns(positions);
-            mockSearchModel.Setup(data => data.Keywords).Returns(keywords);
-            mockSearchModel.Setup(data => data.Url).Returns(url);
-            mockSearchModel.Setup(data => data.Positions).Returns(positions);
+            mockGoogleSearchHelper.Setup<List<int>>(data => data.GetPosition(url, keywords)).Returns(positions);
 
-            //this.searchModel = mockSearchModel.Object;
             this.controller = new HomeController(mockGoogleSearchHelper.Object);
-            this.searchModel = new SearchModel();
         }
 
         [TestMethod]
-        public void TestIndexView()
+        public void test_controller_view_result()
         {
             var result = controller.Index() as ViewResult;
             Assert.AreEqual("Index", result.ViewName);
         }
 
+        [TestMethod]
+        public void test_controller_with_model_error()
+        {
+            SearchViewModel searchViewModel = new SearchViewModel
+            {
+                Keywords = null,
+                Url = null
+            };
+
+            controller.ModelState.AddModelError("fakeError", "fakeError");
+
+            var result = controller.Index(searchViewModel) as ViewResult;
+
+            Assert.IsTrue(!controller.ModelState.IsValid);
+            Assert.AreEqual("Index", result.ViewName);
+        }
 
         [TestMethod]
-        public void TestIndexPostView()
+        public void test_controller_with_valid_model_and_result()
         {
-            var result = controller.Index(searchModel) as ViewResult;
+            SearchViewModel searchViewModel = new SearchViewModel
+            {
+                Keywords = keywords,
+                Url = url
+            };
+
+            var result = controller.Index(searchViewModel) as ViewResult;
+
+            Assert.IsTrue(controller.ModelState.IsValid);
+            Assert.AreEqual(positions, result.ViewData["Positions"]);
             Assert.AreEqual("Index", result.ViewName);
         }
     }

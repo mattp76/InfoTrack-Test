@@ -25,7 +25,6 @@ namespace InfoTrack.Seo.Web.Ioc
 
             builder.Register(logger => LogManager.GetLogger(MethodBase.GetCurrentMethod().ReflectedType)).As<ILog>();
             builder.RegisterType<GoogleSearchPositionHelper>().As<IGoogleSearchPositionHelper>().InstancePerLifetimeScope();
-            builder.RegisterType<SearchModel>().As<ISearchModel>().InstancePerLifetimeScope();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

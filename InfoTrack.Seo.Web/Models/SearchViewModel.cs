@@ -7,7 +7,7 @@ using InfoTrack.Seo.Web.Interfaces;
 
 namespace InfoTrack.Seo.Web.Models
 {
-    public class SearchModel : ISearchModel
+    public class SearchViewModel : ISearchViewModel
     {
         [Required]
         public string Keywords { get; set; }
@@ -15,6 +15,5 @@ namespace InfoTrack.Seo.Web.Models
         [Required]
         public string Url { get; set; }
 
-        public List<int> Positions { get; set; }
     }
 }
