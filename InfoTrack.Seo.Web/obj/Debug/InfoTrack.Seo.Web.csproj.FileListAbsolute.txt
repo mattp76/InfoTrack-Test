@@ -105,6 +105,7 @@ C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\ko\System.Spatial.resource
 C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\ru\System.Spatial.resources.dll
 C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\zh-Hans\System.Spatial.resources.dll
 C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\zh-Hant\System.Spatial.resources.dll
-C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\obj\Debug\InfoTrack.Seo.Web.csprojResolveAssemblyReference.cache
 C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\obj\Debug\InfoTrack.Seo.Web.dll
 C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\obj\Debug\InfoTrack.Seo.Web.pdb
+C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\Autofac.dll
+C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\Autofac.xml
