@@ -6,6 +6,14 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Autofac;
+using InfoTrack.Seo.Web.Ioc;
+using InfoTrack.Seo.Web.Controllers;
+using Autofac.Integration.Mvc;
+using log4net;
+using InfoTrack.Seo.Web.Helpers;
+using InfoTrack.Seo.Web.Interfaces;
+using System.Reflection;
 
 namespace InfoTrack.Seo.Web
 {
@@ -14,6 +22,8 @@ namespace InfoTrack.Seo.Web
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        //private static IContainer _container;
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -23,6 +33,18 @@ namespace InfoTrack.Seo.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+            //var builder = new ContainerBuilder();
+
+            // Register your MVC controllers.
+            //builder.RegisterType<HomeController>().InstancePerRequest();
+
+            //builder.Register(logger => LogManager.GetLogger(MethodBase.GetCurrentMethod().ReflectedType)).As<ILog>();
+            //builder.RegisterType<GoogleSearchPositionHelper>().As<IGoogleSearchPositionHelper>().InstancePerLifetimeScope();
+
+
+            new AppRegistration().Register();
+
         }
     }
 }

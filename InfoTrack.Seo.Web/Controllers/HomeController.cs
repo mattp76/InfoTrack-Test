@@ -16,7 +16,7 @@ namespace InfoTrack.Seo.Web.Controllers
     {
 
         private readonly IGoogleSearchPositionHelper _googleSearchPositionHelper;
-
+     
         public HomeController(IGoogleSearchPositionHelper googleSearchPositionHelper)
         {
             _googleSearchPositionHelper = googleSearchPositionHelper;
@@ -30,7 +30,7 @@ namespace InfoTrack.Seo.Web.Controllers
 
 
         [HttpPost]
-        public ActionResult Index(ISearchModel searchModel)
+        public ActionResult Index(SearchModel searchModel)
         {
 
             List<int> positions;

@@ -49,9 +49,9 @@ form {
 }
 
 .searchResults {
-    padding:10px;
+    padding:0 10px 10px 10px;
     border-top:1px solid #ccc;
-    background-color:#f8f8f8;
+    background-color:#fff;
 }
 
 .searchResults .positions{
@@ -440,11 +440,12 @@ label.checkbox {
 input, textarea {
     border: 1px solid #e2e2e2;
     background: #fff;
-    color: #333;
-    font-size: 1.2em;
+    color: #555;
+    font-size: 14px;;
     margin: 5px 0 6px 0;
     padding: 5px;
     width: 300px;
+    display:block;
 }
 
 textarea {

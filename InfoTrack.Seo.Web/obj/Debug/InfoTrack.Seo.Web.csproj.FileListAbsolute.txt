@@ -61,7 +61,6 @@ C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\EntityFramework.dll
 C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\HtmlAgilityPack.dll
 C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\log4net.dll
 C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\Microsoft.Web.Infrastructure.dll
-C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\Newtonsoft.Json.dll
 C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\System.Net.Http.Formatting.dll
 C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\System.Spatial.dll
@@ -109,3 +108,6 @@ C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\obj\Debug\InfoTrack.Seo.Web.dl
 C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\obj\Debug\InfoTrack.Seo.Web.pdb
 C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\Autofac.dll
 C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\Autofac.xml
+C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\Autofac.Integration.Mvc.dll
+C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\Autofac.Integration.Mvc.xml
+C:\Git\Tutotials\InfoTrack-Test\InfoTrack.Seo.Web\bin\Microsoft.Web.Helpers.dll

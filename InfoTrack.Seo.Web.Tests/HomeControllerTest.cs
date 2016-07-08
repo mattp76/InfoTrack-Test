@@ -17,7 +17,7 @@ namespace InfoTrack.Seo.Web.Tests
     {
 
         private HomeController controller;
-        private ISearchModel searchModel;
+        private SearchModel searchModel;
 
         [TestInitialize]
         public void Initialize() {
@@ -28,24 +28,22 @@ namespace InfoTrack.Seo.Web.Tests
     
             var mockGoogleSearchHelper = new Mock<IGoogleSearchPositionHelper>();
             var mockSearchModel = new Mock<ISearchModel>();
-
+    
             mockGoogleSearchHelper.Setup(data => data.GetPosition(url, keywords)).Returns(positions);
             mockSearchModel.Setup(data => data.Keywords).Returns(keywords);
             mockSearchModel.Setup(data => data.Url).Returns(url);
             mockSearchModel.Setup(data => data.Positions).Returns(positions);
 
+            //this.searchModel = mockSearchModel.Object;
             this.controller = new HomeController(mockGoogleSearchHelper.Object);
-            this.searchModel = mockSearchModel.Object;
+            this.searchModel = new SearchModel();
         }
 
         [TestMethod]
         public void TestIndexView()
         {
-
             var result = controller.Index() as ViewResult;
-
             Assert.AreEqual("Index", result.ViewName);
-
         }
 
 
@@ -53,9 +51,7 @@ namespace InfoTrack.Seo.Web.Tests
         public void TestIndexPostView()
         {
             var result = controller.Index(searchModel) as ViewResult;
-
             Assert.AreEqual("Index", result.ViewName);
-
         }
     }
 }

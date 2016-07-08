@@ -6,14 +6,20 @@ using System.Net;
 using System.Text;
 using System.Web;
 using InfoTrack.Seo.Web.Interfaces;
+using log4net;
 
 namespace InfoTrack.Seo.Web.Helpers
 {
 
     public class GoogleSearchPositionHelper : IGoogleSearchPositionHelper
     {
+        protected readonly ILog _logger;
 
-        public log4net.ILog _logger = log4net.LogManager.GetLogger(typeof(GoogleSearchPositionHelper));
+        public GoogleSearchPositionHelper(ILog logger)
+        {
+            _logger = logger;
+        }
+
 
         public List<int> GetPosition(string url, string searchTerm)
         {
@@ -60,7 +66,7 @@ namespace InfoTrack.Seo.Web.Helpers
 
                         foreach (var attribute in node.Attributes)
                         {
-                            if (attribute.Value.Contains(url) && counter < 100)
+                            if (attribute.Name == "href" && attribute.Value.Contains(url) && counter < 100)
                             {
                                 positions.Add(counter);
                             }
