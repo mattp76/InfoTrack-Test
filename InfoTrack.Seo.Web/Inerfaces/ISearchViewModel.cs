@@ -10,5 +10,6 @@ namespace InfoTrack.Seo.Web.Interfaces
     {
         string Keywords { get; set; }
         string Url { get; set; }
+        List<int> Positions { get; set; }
     }
 }

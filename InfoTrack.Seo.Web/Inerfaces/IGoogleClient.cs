@@ -9,8 +9,8 @@ using System.Web;
 namespace InfoTrack.Seo.Web.Interfaces
 {
 
-    public interface IGoogleSearchPositionHelper
+    public interface IGoogleClient
     {
-        List<int> GetPosition(string keywords, string url);
+        String getGoogleResponse(string keywords);
     }
 }

@@ -7,57 +7,46 @@ using System.Text;
 using System.Web;
 using InfoTrack.Seo.Web.Interfaces;
 using log4net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using InfoTrack.Seo.Web.Clients;
 
 namespace InfoTrack.Seo.Web.Helpers
 {
 
     public class GoogleSearchPositionHelper : IGoogleSearchPositionHelper
     {
+        /// <summary>
+        /// GoogleClient and Logger are injected, using AutoFac.
+        /// </summary>
         protected readonly ILog _logger;
+        protected readonly IGoogleClient _client;
 
-        public GoogleSearchPositionHelper(ILog logger)
+        public GoogleSearchPositionHelper(ILog logger, IGoogleClient client)
         {
             _logger = logger;
+            _client = client;
         }
 
 
-        public List<int> GetPosition(string url, string searchTerm)
+        /// <summary>
+        /// Get the position of the url within a google search.
+        /// </summary>
+        /// <returns>A list of integers representing the position(s) of the URL.</returns>
+        public List<int> GetPosition(string keywords, string url)
         {
+            int counter = -1;
+            List<int> positions = new List<int>();
+
             try
             {
-                string raw = "http://www.google.com/search?num=100&q={0}&btnG=Search";
-                string search = string.Format(raw, HttpUtility.UrlEncode(searchTerm));
+                var html = _client.getGoogleResponse(keywords);
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(search);
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                {
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.ASCII))
-                    {
-                        string html = reader.ReadToEnd();
-                        return FindPosition(html, url);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.ToString());
-            }
-
-            return null;
-        }
-
-
-        public List<int> FindPosition(string html, string url)
-        {
-            try
-            {
                 var doc = new HtmlAgilityPack.HtmlDocument();
                 doc.LoadHtml(html);
 
                 var nodes = doc.DocumentNode.SelectNodes("//h3/a[@href]");
-                int counter = -1;
-                List<int> positions = new List<int>();
-
+    
                 if (nodes != null)
                 {
                     foreach (var node in nodes)
@@ -81,7 +70,7 @@ namespace InfoTrack.Seo.Web.Helpers
                 _logger.Error(ex.ToString());
             }
 
-            return null;
+            return positions;
         }
     }
 }

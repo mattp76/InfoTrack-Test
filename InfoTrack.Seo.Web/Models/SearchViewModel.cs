@@ -15,5 +15,7 @@ namespace InfoTrack.Seo.Web.Models
         [Required]
         public string Url { get; set; }
 
+        public List<int> Positions { get; set; }
+
     }
 }

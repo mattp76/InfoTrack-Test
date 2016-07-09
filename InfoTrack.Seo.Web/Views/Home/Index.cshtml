@@ -18,9 +18,15 @@
 @if(!string.IsNullOrEmpty(Model.Keywords) && !string.IsNullOrEmpty(Model.Url)) {
 <div class="searchResults">
     <p>
-        @if (positions != null)
+        @if (Model.Positions != null)
         {
-            <span class="positions">Google position(s): @string.Join(",", positions)</span>
+            if (Model.Positions.Count > 0) { 
+                <span class="positions">Google position(s): @string.Join(",", Model.Positions)</span>
+            }
+            else
+            {
+                <span class="positions">No results</span> 
+            }
         }else {
             <span class="positions">No results</span>
         }

@@ -12,11 +12,14 @@ using Moq;
 
 namespace InfoTrack.Seo.Web.Tests
 {
+    /// <summary>
+    ///  Some basic testing for the home controller. I am using Moq to pass through a mocked version of the GoogleSearchHelper, along with a dummy response.
+    /// </summary> 
     [TestClass]
     public class HomeControllerTest
     {
-
         private HomeController controller;
+        private SearchViewModel searchViewModel;
         private string url;
         private string keywords;
         private List<int> positions;
@@ -29,27 +32,22 @@ namespace InfoTrack.Seo.Web.Tests
             keywords = "online term search";
     
             var mockGoogleSearchHelper = new Mock<IGoogleSearchPositionHelper>();
-            mockGoogleSearchHelper.Setup<List<int>>(data => data.GetPosition(url, keywords)).Returns(positions);
-
+            mockGoogleSearchHelper.Setup<List<int>>(data => data.GetPosition(It.IsAny<string>(), It.IsAny<string>())).Returns(positions);
             this.controller = new HomeController(mockGoogleSearchHelper.Object);
+
+            searchViewModel = new SearchViewModel{Keywords = keywords, Url = url};
         }
 
         [TestMethod]
-        public void test_controller_view_result()
+        public void Test_Controller_Default_View()
         {
             var result = controller.Index() as ViewResult;
             Assert.AreEqual("Index", result.ViewName);
         }
 
         [TestMethod]
-        public void test_controller_with_model_error()
+        public void Test_Controller_With_Model_Error()
         {
-            SearchViewModel searchViewModel = new SearchViewModel
-            {
-                Keywords = null,
-                Url = null
-            };
-
             controller.ModelState.AddModelError("fakeError", "fakeError");
 
             var result = controller.Index(searchViewModel) as ViewResult;
@@ -59,18 +57,12 @@ namespace InfoTrack.Seo.Web.Tests
         }
 
         [TestMethod]
-        public void test_controller_with_valid_model_and_result()
+        public void Test_Controller_With_Valid_Model_and_Result()
         {
-            SearchViewModel searchViewModel = new SearchViewModel
-            {
-                Keywords = keywords,
-                Url = url
-            };
-
             var result = controller.Index(searchViewModel) as ViewResult;
 
             Assert.IsTrue(controller.ModelState.IsValid);
-            Assert.AreEqual(positions, result.ViewData["Positions"]);
+            Assert.AreEqual(positions, searchViewModel.Positions);
             Assert.AreEqual("Index", result.ViewName);
         }
     }

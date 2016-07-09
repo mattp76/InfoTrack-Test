@@ -11,20 +11,23 @@ using InfoTrack.Seo.Web.Controllers;
 using System.Web.Mvc;
 using Autofac.Integration.Mvc;
 using InfoTrack.Seo.Web.Models;
+using InfoTrack.Seo.Web.Clients;
 
 namespace InfoTrack.Seo.Web.Ioc
 {
+    /// <summary>
+    /// Register dependancies
+    /// </summary>
     public class AppRegistration
     {
          public IContainer Register()
         {
             ContainerBuilder builder = new ContainerBuilder();
 
-           // builder.RegisterType<HomeController>().InstancePerRequest();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
-
             builder.Register(logger => LogManager.GetLogger(MethodBase.GetCurrentMethod().ReflectedType)).As<ILog>();
             builder.RegisterType<GoogleSearchPositionHelper>().As<IGoogleSearchPositionHelper>().InstancePerLifetimeScope();
+            builder.RegisterType<GoogleClient>().As<IGoogleClient>().InstancePerLifetimeScope();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
